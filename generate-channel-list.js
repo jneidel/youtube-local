@@ -1,29 +1,29 @@
 #! /usr/bin/env node
 
-const fs = require("fs")
-const data = fs.readFileSync("./CHANNELS", {encoding: "utf8"})
+const fs = require( "fs" );
+const path = require( "path" );
+const data = fs.readFileSync( path.resolve( __dirname, "CHANNELS" ), { encoding: "utf8" } );
 
-const arr = data.split("\n")
-  .filter( x => x !== "" )
+const arr = data.split( "\n" )
+  .filter( x => x !== "" ) // Empty lines
+  .filter( x => x[0] !== "#" ) // Comment lines
   .map( x => {
-    return x.match( /^(.*?)(?:\s.*)?$/ )[1]
+    return x.match( /^(.*?)(?:\s.*)?$/ )[1];
   } )
   .map( x => {
-    const letters = x.split("")
-    if ( letters[0] !== "U" ) {
-      letters.unshift( "U" );
-      letters.unshift( "U" );
-    } else if ( letters[0] === "U" && letters[1] === "C" ) {
-      letters.shift()
-      letters.shift()
+    const letters = x.split( "" );
+
+    if ( letters[0] === "U" && letters[1] === "C" ) {
+      letters.shift();
+      letters.shift();
       letters.unshift( "U" );
       letters.unshift( "U" );
     }
 
-    return letters.join("")
-  } )
+    return letters.join( "" );
+  } );
 
-const str = arr.join( "\n" )
+const str = arr.join( "\n" );
 
-fs.writeFileSync( "./CHANNELS_OUT", str )
+fs.writeFileSync( path.resolve( __dirname, "CHANNELS_OUT" ), str );
 
