@@ -1,8 +1,8 @@
 # youtube-local
 
-> Local version of youtubes subscription feed
+> Local version of youtubes subscription feed; manage new videos in vim and watch with vlc
 
-Using youtubes api this collectiction of scripts scrapes the channels of your subscribed youtubers for new videos, relative to the last time the script ran. New videos will be collected in a file, and using a vim script you start the videos up with vlc.
+Using youtubes api, this collection of scripts scrapes the channels of your subscribed youtubers for new videos, relative to the last time the script ran. New videos will be collected in a file, and using a vim script you start the videos with vlc.
 
 ## Motivation
 
@@ -17,59 +17,58 @@ Using youtubes api this collectiction of scripts scrapes the channels of your su
 - [node](https://github.com/nodejs/node)
 - [jq](https://github.com/stedolan/jq)
 
-**Clone the repo:**
+### Clone the repo
 
 ```
 git clone https://github.com/jneidel/youtube-local.git
 cd youtube-local
 ```
 
-**Youtube API key:**
+### Youtube API key
 
 - Follow [these instructions](https://developers.google.com/youtube/v3/getting-started#before-you-start) to generate your api key
-- Insert your key into `env.json`
+- Move `env.json.example` to `env.json` and insert your key
 
-**Add your subscriptions:**
-
-You are looking for channelIds (`UC-lHJZR3Gqxm24_Vd_AJ5Yw` from `https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_AJ5Yw`).
+### Add your subscriptions
 
 - Go to a list of your subscriptions (eg. on your channel -> subscriptions) and click through to a channel
 - If you have the `youtube.com/channel/xxx` url take the id off the end (eg. `UC-lHJZR3Gqxm24_Vd_AJ5Yw` from `https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_AJ5Yw`)
-- If you have the `youtube.com/user/xxx` url, click on a video and click through their channel icon below the video back to the channel. Now you should have the url with the channelId.
-- Add the channelId (beginning with UC...) to the `CHANNELS` file (be sure to leave a comment so you know what the id corresponds to)
+- If you have the `youtube.com/user/xxx` url, click on a video and go through their channel icon below the video back to the channel. Now you should have the url in the `youtube.com/channel/xxx` format
+- Add the channelId (beginning with UC...) to a newly created `CHANNELS` file (be sure to leave a comment so you know what the id corresponds to)
 
-Example
-```
-UC-lHJZR3Gqxm24_Vd_AJ5Yw # pewdiepie - memes
-```
+[View CHANNEL.example](https://github.com/jneidel/youtube-local/blob/master/CHANNELS.example) for channelId and playlist examples
 
 After you've added all channels run `./generate-channel-list.js` to remove comments and replace channelId with the users uploads playlist.
 
-**Finish:**
+### Finish
 
-Run `./setup.sh` to generate a timestamp for the 'last activity' file.
+Run `./setup.sh` to generate need data files.
 
+The 'last activity' will be set to right now (only videos released from this point on will be matched). If you want to change that edit `data/LAST_UPDATE`.
 
-**Vim play script:**
+### Vim play script
 
 I wrote a vim script, that enables you to open `./videos` in vim and start playing the video under the cursor with a keyboard shortcut.
 
-
 ```vim
 let mapleader = "#"
-" Play youtube-link in current line with '#y'
-map <leader>y f-w"1y$0:!vlc -f -q --audio-desync=-250 "<C-R>1"<cr>
-" Start video using vlc:
-"   -f = fullscreen
-"   -q = quiet
-"   --audio-desync=-250 = set audio latency to -250ms (for bluetooth speaker)
+" Play youtube-link in current line with '#y':
+map <leader>y /http<Enter>:noh<Enter>"1y$0:!vlc -q --fullscreen "<C-R>1"<cr>
 ```
 
-[View my current version](https://github.com/jneidel/dotfiles/blob/master/manjaro/.vim/config/yt.vim)
+[View my current script](https://github.com/jneidel/dotfiles/blob/master/manjaro/.vim/config/yt.vim) (includes download & more vlc args)
 
 ## Usage
 
 Run `./download-loop.sh` to check for new videos.
 
 View `./videos` to watch new videos.
+
+## How it works
+
+It scrapes the channels "Uploads from xxx" playlist, to which newly published videos are automatically added ([Example](https://www.youtube.com/playlist?list=UU-lHJZR3Gqxm24_Vd_AJ5Yw)).
+
+This means that you can also add any playlist. If, for example, you don't want to see all uploads from a channel, but only one of their series ([Example](https://www.youtube.com/playlist?list=PLlRceUcRZcK0E1Id3NHchFaxikvCvAVQe)).
+
+Application of these examples: [CHANNEL.example](https://github.com/jneidel/youtube-local/blob/master/CHANNELS.example).
 
