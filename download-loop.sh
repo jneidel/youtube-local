@@ -33,7 +33,7 @@ for c in $CHANNELS
 done
 
 COUNTER=$(cat $DATA_DIR/COUNTER)
-echo "$COUNTER new videos added"
+echo "$COUNTER new videos added                              " # without trailing whitespace it won't override "ls - x new videos..."
 
 $LIB/date-now.js > $DATA_DIR/LAST_UPDATE
 echo 0 > $DATA_DIR/COUNTER
