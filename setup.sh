@@ -1,6 +1,7 @@
 #! /bin/bash
 
 ./lib/date-now.js > ./LAST_UPDATE
+echo 0 > ./COUNTER
 ./generate-channel-list.js
 
 if [[ -z $(command -v jq) ]]; then
@@ -28,4 +29,6 @@ else
   echo "Please add your subscribed channels to 'CHANNELS'"
   echo "" > ./CHANNELS
 fi
+
+
 
