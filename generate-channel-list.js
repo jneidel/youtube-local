@@ -25,5 +25,5 @@ const arr = data.split( "\n" )
 
 const str = arr.join( "\n" );
 
-fs.writeFileSync( path.resolve( __dirname, "CHANNELS_OUT" ), str );
+fs.writeFileSync( path.resolve( __dirname, "data", "CHANNELS_OUT" ), str );
 

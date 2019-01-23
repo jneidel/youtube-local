@@ -11,11 +11,12 @@ fi
 
 DIR=~/scripts/yt
 LIB="$DIR/lib"
+DATA_DIR="$DIR/data"
 API_KEY=$(cat $DIR/env.json | jq .YOUTUBE_API_KEY | sed --expression='s/"//g')
 PLAYLIST_LEN=$(cat $DIR/env.json | jq .PLAYLIST_LEN)
 
-CHANNELS=$(cat $DIR/CHANNELS_OUT)
-CHANNEL_LEN=$(cat $DIR/CHANNELS_OUT | wc -l)
+CHANNELS=$(cat $DATA_DIR/CHANNELS_OUT)
+CHANNEL_LEN=$(cat $DATA_DIR/CHANNELS_OUT | wc -l)
 CHANNEL_CURRENT=-1
 
 for c in $CHANNELS
@@ -23,7 +24,7 @@ for c in $CHANNELS
   # do { <cmd> & } for async, but it doesnt work correctly
 
   CHANNEL_CURRENT=$(echo $CHANNEL_CURRENT+1 | bc)
-  COUNTER=$(cat $DIR/COUNTER)
+  COUNTER=$(cat $DATA_DIR/COUNTER)
   if [[ $COUNTER -gt 0 ]]; then
     echo -ne "Tried $CHANNEL_CURRENT/$CHANNEL_LEN channels - $COUNTER new videos added\r"
   else
@@ -31,9 +32,9 @@ for c in $CHANNELS
   fi
 done
 
-COUNTER=$(cat $DIR/COUNTER)
+COUNTER=$(cat $DATA_DIR/COUNTER)
 echo "$COUNTER new videos added"
 
-$LIB/date-now.js > $DIR/LAST_UPDATE
-echo 0 > $DIR/COUNTER
+$LIB/date-now.js > $DATA_DIR/LAST_UPDATE
+echo 0 > $DATA_DIR/COUNTER
 

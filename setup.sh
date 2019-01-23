@@ -1,7 +1,8 @@
 #! /bin/bash
 
-./lib/date-now.js > ./LAST_UPDATE
-echo 0 > ./COUNTER
+mkdir ./data;
+./lib/date-now.js > ./data/LAST_UPDATE
+echo 0 > ./data/COUNTER
 ./generate-channel-list.js
 
 if [[ -z $(command -v jq) ]]; then

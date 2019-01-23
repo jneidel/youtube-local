@@ -19,7 +19,8 @@ API_KEY=$2
 PLAYLIST_LEN=$3
 DIR=~/scripts/yt
 LIB="$DIR/lib"
-LAST_DATE=$(cat $DIR/LAST_UPDATE)
+DATA_DIR="$DIR/data"
+LAST_DATE=$(cat $DATA_DIR/LAST_UPDATE)
 
 if [[ $PLAYLIST = "UU0BAd8tPlDqFvDYBemHcQPQ" ]]; then
   PLAYLIST_LEN=15 # playlist order is messed up, with 5 new vids arent in range
@@ -45,8 +46,8 @@ if [[ -n $TEST ]]; then
     }
   done
 
-  COUNTER=$(cat $DIR/COUNTER)
-  echo $COUNTER+$LENGTH | bc > $DIR/COUNTER
+  COUNTER=$(cat $DATA_DIR/COUNTER)
+  echo $COUNTER+$LENGTH | bc > $DATA_DIR/COUNTER
 fi
 
 
