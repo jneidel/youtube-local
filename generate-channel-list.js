@@ -27,3 +27,5 @@ const str = arr.join( "\n" );
 
 fs.writeFileSync( path.resolve( __dirname, "data", "CHANNELS_OUT" ), str );
 
+console.log( "Wrote data/CHANNELS_OUT" );
+
