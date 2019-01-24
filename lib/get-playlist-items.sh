@@ -45,7 +45,8 @@ if [[ -n $TEST ]]; then
     }
   done
 
-  $(($(cat $DATA_DIR/COUNTER)+$LENGTH)) > $DATA_DIR/COUNTER
+  COUNTER=$(cat $DATA_DIR/COUNTER)
+  echo $COUNTER+$LENGTH | bc > $DATA_DIR/COUNTER
 fi
 
 
