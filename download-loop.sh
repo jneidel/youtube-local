@@ -23,7 +23,7 @@ for c in $CHANNELS
   do $LIB/get-playlist-items.sh $c $API_KEY $PLAYLIST_LEN
   # do { <cmd> & } for async, but it doesnt work correctly
 
-  CHANNEL_CURRENT=$(echo $CHANNEL_CURRENT+1 | bc)
+  CHANNEL_CURRENT=$(($CHANNEL_CURRENT+1))
   COUNTER=$(cat $DATA_DIR/COUNTER)
   if [[ $COUNTER -gt 0 ]]; then
     echo -ne "Tried $CHANNEL_CURRENT/$CHANNEL_LEN channels - $COUNTER new videos added\r"

@@ -33,10 +33,9 @@ TEST=$(echo $DATA | jq .items[].length) # .length does not exist, but returns nu
 
 if [[ -n $TEST ]]; then
   LENGTH=$(echo $DATA | jq .items[].length | wc -l) # reusing $TEST does not work (messes up format)
-  SEQ_LENGTH=$(echo $LENGTH-1 | bc)
   CHANNEL=$(echo $DATA | jq .items[0].snippet.channelTitle | sed --expression='s/"//g')
 
-  for x in $(seq 0 $SEQ_LENGTH)
+  for x in $(seq 0 $(($LENGTH-1)))
     do {
       TITLE=$(echo $DATA | jq .items[$x].snippet.title | sed --expression='s/"//g')
       VIDEO_ID=$(echo $DATA | jq .items[$x].snippet.resourceId.videoId | sed --expression='s/"//g')
@@ -46,8 +45,7 @@ if [[ -n $TEST ]]; then
     }
   done
 
-  COUNTER=$(cat $DATA_DIR/COUNTER)
-  echo $COUNTER+$LENGTH | bc > $DATA_DIR/COUNTER
+  $(($(cat $DATA_DIR/COUNTER)+$LENGTH)) > $DATA_DIR/COUNTER
 fi
 
 
