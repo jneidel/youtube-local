@@ -25,5 +25,5 @@ DATA=$(echo $DATA | $LIB/parse-json.js)
 
 CHANNEL=$(echo $DATA | jq .items[0].snippet.channelTitle | sed --expression='s/"//g')
 TITLE=$(echo $DATA | jq .items[0].snippet.title | sed --expression='s/"//g')
-echo "$CHANNEL: $TITLE - $URL" >> $DIR/videos
+echo "$CHANNEL: $TITLE $URL" >> $DIR/videos
 

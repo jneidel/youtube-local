@@ -40,8 +40,7 @@ if [[ -n $TEST ]]; then
       TITLE=$(echo $DATA | jq .items[$x].snippet.title | sed --expression='s/"//g')
       VIDEO_ID=$(echo $DATA | jq .items[$x].snippet.resourceId.videoId | sed --expression='s/"//g')
       URL="https://www.youtube.com/watch?v=$VIDEO_ID"
-      echo "$CHANNEL: $TITLE - $URL" >> $DIR/videos
-      #echo "$CHANNEL: $TITLE - $URL"
+      echo "$CHANNEL: $TITLE $URL" >> $DIR/videos
     }
   done
 
