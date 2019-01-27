@@ -4,6 +4,28 @@
 
 Using youtubes api, this collection of scripts scrapes the channels of your subscribed youtubers for new videos, relative to the last time the script ran. New videos will be collected in a file, and using a vim script you start the videos with vlc.
 
+<details>
+<summary><strong>Table of Contents</strong></summary>
+
+<!-- toc -->
+
+- [Motivation](#motivation)
+- [Setup](#setup)
+  * [Clone the repo](#clone-the-repo)
+  * [Youtube API key](#youtube-api-key)
+  * [Add your subscriptions](#add-your-subscriptions)
+  * [Finish](#finish)
+  * [Vim play script](#vim-play-script)
+- [Usage](#usage)
+- [How it works](#how-it-works)
+- [Script (for easier usage)](#script-for-easier-usage)
+  * [Align videos](#align-videos)
+
+<!-- tocstop -->
+
+</details>
+
+
 ## Motivation
 
 - My browser automatically deletes cookies, history, everything once I quit it. So to watch youtube I have to login every time.
@@ -71,4 +93,30 @@ It scrapes the channels "Uploads from xxx" playlist, to which newly published vi
 This means that you can also add any playlist. If, for example, you don't want to see all uploads from a channel, but only one of their series ([Example](https://www.youtube.com/playlist?list=PLlRceUcRZcK0E1Id3NHchFaxikvCvAVQe)).
 
 Application of these examples: [CHANNEL.example](https://github.com/jneidel/youtube-local/blob/master/CHANNELS.example).
+
+## Script (for easier usage)
+
+### Align videos
+
+This script will format videos in the `videos` file to align each title and url horizontally:
+
+```
+pewdiepie: INSERT CLICKBAIT HERE https://www.youtube.com/watch?v=FK5pjkUP6t8
+channel:   video title           https://www.youtube.com/watch?v=oQ28ZolgeaI
+me:        meh                   https://www.youtube.com/watch?v=oQ28ZolgeaI
+```
+
+This script should be used in conjunction with a vim visual selection:
+
+```
+From this scripts --help:
+
+Example (in vim):
+Select all videos (normal mode): gg v G
+:'<,'> !~/path/to/youtube-local/bin/align-videos.sh
+```
+
+View script at: [bin/align-videos.sh](bin/align-videos.sh)
+
+View how I integrate it in my workflow: [yt.vim](https://github.com/jneidel/dotfiles/blob/master/manjaro/.vim/config/yt.vim#L11)
 
