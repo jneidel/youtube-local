@@ -18,7 +18,8 @@ Using youtubes api, this collection of scripts scrapes the channels of your subs
   * [Vim play script](#vim-play-script)
 - [Usage](#usage)
 - [How it works](#how-it-works)
-- [Script (for easier usage)](#script-for-easier-usage)
+- [Utility Scripts (for easier usage)](#utility-scripts-for-easier-usage)
+  * [Add video](#add-video)
   * [Align videos](#align-videos)
 
 <!-- tocstop -->
@@ -94,7 +95,19 @@ This means that you can also add any playlist. If, for example, you don't want t
 
 Application of these examples: [CHANNEL.example](https://github.com/jneidel/youtube-local/blob/master/CHANNELS.example).
 
-## Script (for easier usage)
+## Utility Scripts (for easier usage)
+
+### Add video
+
+Given a youtube link, this script will add that video to the `videos` file. Includes fetching channel/video name.
+
+```
+$ ./bin/add-video.sh https://www.youtube.com/watch?v=fORh5rodVSg
+$ tail ./videos
+#-> pewdiepie: G R E E N T E X T https://www.youtube.com/watch?v=fORh5rodVSg
+```
+
+I use this script through [another script](https://github.com/jneidel/dotfiles/blob/master/manjaro/scripts/i3/clipboard/clipboard-add-yt-video.sh), which will get the current clipboard content pass it to `add-video.sh`.
 
 ### Align videos
 
