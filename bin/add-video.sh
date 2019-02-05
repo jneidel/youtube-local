@@ -5,7 +5,7 @@ if [[ $1 = "--help" ]] || [[ $1 = "help" ]]; then
   echo "Add a video to videos"
   echo ""
   echo "Parameters:"
-  echo "$1: yt-link"
+  echo "\$1: yt-link"
   echo ""
   echo "Example:"
   echo "$ add-video.sh https://www.youtube.com/watch?v=G_4Cv-AP7xU"
