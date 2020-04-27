@@ -1,8 +1,10 @@
-# youtube-local
+~~# youtube-local~~
 
-> Local version of youtubes subscription feed; manage new videos in vim and watch with vlc
+~~> Local version of youtubes subscription feed; manage new videos in vim and watch with vlc~~
 
-Using youtubes api, this collection of scripts scrapes the channels of your subscribed youtubers for new videos, relative to the last time the script ran. New videos will be collected in a file, and using a vim script you start the videos with vlc.
+~~Using youtubes api, this collection of scripts scrapes the channels of your subscribed youtubers for new videos, relative to the last time the script ran. New videos will be collected in a file, and using a vim script you start the videos with vlc.~~
+
+## Replaced by newsboat + youtube RSS feeds
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
